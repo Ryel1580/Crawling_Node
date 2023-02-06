@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import BoardApi from "../../api/BoardApi";
-import Modal from "../../modal/modal";
 
 const Container = styled.div`
     width: 1000px;
@@ -109,8 +108,6 @@ const Container = styled.div`
 
 const Board = () =>{
     const [itemData , setItemData] = useState([]);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectModal , setSelectModal] = useState(0);
     
     // 서버에서 정보 받아오기
     useEffect(() =>{
@@ -128,20 +125,14 @@ const Board = () =>{
     },[])
 
     
-    const openModal = (e) =>{
-        setModalOpen(true)
-        setSelectModal(e)
-    }
-    const closeModal = () =>{
-        setModalOpen(false)
-    }
+
     console.log("test", itemData)
 
     return( 
         <Container>
             <div className="content">
                 <div className="title">
-                    <p className="titleName">라방 랭킹<img src="https://datalab.labangba.com/__modules/Title/tooltip_icon.svg" onClick={()=>{openModal(1)}}/></p>
+                    <p className="titleName">라방 랭킹<img src="https://datalab.labangba.com/__modules/Title/tooltip_icon.svg"/></p>
                     <p className="subName">72시간 동안 가장 매출액 높은 라이브방송</p>
                     
                 </div>
@@ -153,8 +144,8 @@ const Board = () =>{
                                     <th style={{width:"12%"}}>분류</th>
                                     <th style={{width:"12.5%"}}>방송시간</th>
                                     <th style={{width:"10%"}}>조회수</th>
-                                    <th style={{width:"10%"}}>판매량<img src="https://datalab.labangba.com/__modules/Table/tooltip.svg" onClick={()=>{openModal(2)}}/></th>
-                                    <th style={{width:"12.5%"}}>매출액<img src="https://datalab.labangba.com/__modules/Table/tooltip.svg" onClick={()=>{openModal(3)}}/></th>
+                                    <th style={{width:"10%"}}>판매량<img src="https://datalab.labangba.com/__modules/Table/tooltip.svg"/></th>
+                                    <th style={{width:"12.5%"}}>매출액<img src="https://datalab.labangba.com/__modules/Table/tooltip.svg" /></th>
                                     <th style={{width:"8%"}}>상품수</th>
                             </tr>
                         </thead>
@@ -183,7 +174,6 @@ const Board = () =>{
                         </tbody>
                     </table>
                 </div>
-                <Modal open={modalOpen} close={closeModal} id={selectModal}></Modal>
         </Container>
     )
 }
